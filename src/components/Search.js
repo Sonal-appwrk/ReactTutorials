@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { CREATE_USER, UPDATE_USER ,ALL_USER_INFO} from "./Queries";
+import { CREATE_USER, UPDATE_USER, ALL_USER_INFO, COUNT_USER } from "./Queries";
 import { Form, Input, Button } from "antd";
 
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 
 function Search() {
   const [editUser, setEditUser] = useState("");
@@ -14,7 +14,8 @@ function Search() {
       variables: {
         name: editUser,
       },
-      refetchQueries:[{query:ALL_USER_INFO}]
+
+      refetchQueries: [{ query: ALL_USER_INFO }, { query: COUNT_USER }],
     });
     if (updateError) {
       console.log(updateError);
@@ -22,11 +23,14 @@ function Search() {
       alert("data updated");
     }
   };
+
   const AddUser = (values) => {
     createUser({
       variables: {
         name: values.newUser,
       },
+
+      refetchQueries: [{ query: ALL_USER_INFO }, { query: COUNT_USER }],
     });
     if (error) {
       console.log(error);
@@ -38,7 +42,10 @@ function Search() {
   return (
     <div>
       <Form layout="inline" onFinish={AddUser}>
-        <Form.Item name="newUser">
+        <Form.Item
+          name="newUser"
+          rules={[{ required: true, message: "Please enter Username!" }]}
+        >
           <Input
             type="text"
             onChange={(e) => {

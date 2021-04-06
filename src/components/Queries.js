@@ -4,6 +4,10 @@ export const ALL_USER_INFO = gql`
     users {
       id
       name
+      rocket
+      timestamp
+      twitter
+      
     }
   }
 `;
@@ -24,12 +28,25 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
 export const UPDATE_USER = gql`
-mutation updateUser($name:String){
-    update_users(where: {name: {_eq: $name}}, _set: {name: "updatename"}) {
+  mutation updateUser($name: String) {
+    update_users(
+      where: { name: { _eq: $name } }
+      _set: { name: "updatename" }
+    ) {
       returning {
         name
       }
     }
   }
-  `
+`;
+export const COUNT_USER = gql`
+  query {
+    users_aggregate {
+      aggregate {
+        count(columns: id)
+      }
+    }
+  }
+`;

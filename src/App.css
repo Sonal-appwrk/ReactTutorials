@@ -2,7 +2,14 @@
 .App {
   text-align: center;
 }
-
+.ant-table-thead > tr >th{
+  color: white !important;
+  background:rgb(0,21,41) !important;
+}
+.ant-table-tbody {
+  background-color: rgb(139, 204, 230);
+  color:black;
+ }
 .App-logo {
   height: 40vmin;
   pointer-events: none;

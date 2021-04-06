@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Layout, Menu } from "antd";
 import Signup from "./Signupform";
 import Login from "./Login";
-import Home from "./Home";
+import Home from "./Admin";
 
 import  { SpecificUserInfo } from "./UserInfo";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -24,7 +24,7 @@ export default function Nabvar() {
         <Router>
           <Menu theme="dark" mode="horizontal">
             <Menu.Item key="1">
-              <Link to="/home">Home</Link>
+              <Link to="/">Home</Link>
             </Menu.Item>
 
             {!login && (
@@ -45,13 +45,13 @@ export default function Nabvar() {
           </Menu>
           <br />
 
-          <Route exact path="/home" component={Home}></Route>
           <Route path="/signup" component={Signup}></Route>
 
           <Route path="/login">
             <Login isLogin={login} Logged={loggedIn} />
           </Route>
           <Route path="/user/:id" component={SpecificUserInfo}></Route>
+      
         </Router>
       </Header>
     </div>

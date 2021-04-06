@@ -1,5 +1,5 @@
-import React, { useState , useEffect } from "react";
-import Home from "./Home";
+import React, { useState, useEffect } from "react";
+import Admin from "./Admin";
 import { Form, Input, Button } from "antd";
 const tailLayout = {
   wrapperCol: { offset: 8, span: 8 },
@@ -19,16 +19,20 @@ export default function Login(props) {
         ? (count = 1)
         : (count = 0);
     });
-    count === 0 ? alert("Invalid Credentials") : alert("Successfully Logged In");
-    props.Logged();
-    setComponentRender(true); 
+    if (count == 0) {
+      alert("Invalid Cred");
+    } else {
+      alert("Successfully Logged In");
+      setComponentRender(true);
+      props.Logged()
+    }
   }
   useEffect(() => {
-    setComponentRender(props.isLogin);
+    setComponentRender(props.isLogin)
   })
   return (
     <div>
-    <h1>{componentRender}</h1>
+      <h1>{componentRender}</h1>
       {!componentRender && (
         <Form {...layout} onFinish={onSubmit}>
           <Form.Item
@@ -57,7 +61,7 @@ export default function Login(props) {
           </Form.Item>
         </Form>
       )}
-      {componentRender && <Home />}
+      {componentRender && <Admin />}
 
       <br />
     </div>
